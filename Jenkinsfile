@@ -15,7 +15,7 @@
       }
       stage('Mysql database update'){
          
-              sh 'mysql -u root -pMysqllaatmebinnen1! employees </var/lib/jenkins/workspace/SNB2_pipeline/employees.sql'
+              sh 'mysql -u root -pMysqllaatmebinnen1! employees </var/lib/jenkins/workspace/SNB2_Keuze@2/employees.sql'
               echo 'Mysql updaten door .sql file in repo'
           }
       
