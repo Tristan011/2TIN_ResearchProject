@@ -24,15 +24,6 @@
               sh 'sudo cp -R /var/lib/jenkins/workspace/SNB2_Keuze@2/* /var/www/html/'
               echo'Depoymetn of repo to live'
           
-      }/*
-      stage('Post-clean'){	      
-	      deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
-	      echo 'Deleted folder'
-   }*/
-	   post {
-        always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
-        }
-	   }
+      }
+	   
  }
