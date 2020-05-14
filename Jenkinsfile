@@ -1,4 +1,8 @@
    node {
+	    stage('clean-up'){
+                    deleteDir()
+                    echo 'Delete folders'
+            }
       stage('Build'){
               sh 'composer install' 
               echo 'Build'
