@@ -1,10 +1,4 @@
    node {
-      
-      stage('fetch-code') {
-        
-            git 'https://github.com/Tristan011/2TIN_ResearchProject.git'
-            echo 'Code van git gehaald'
-      }
       stage('Build'){
               sh 'composer install' 
               echo 'Build'
@@ -29,5 +23,7 @@
           
       }
       stage('Post-clean'){
-	    deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
+	      
+	    //deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
+	      echo 'Deleted folder'
    }
