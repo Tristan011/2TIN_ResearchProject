@@ -27,7 +27,7 @@
       }
       stage('Post-clean'){
 	      
-	    //deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
+	      deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
 	      echo 'Deleted folder'
    }
  }
