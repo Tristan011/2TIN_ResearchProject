@@ -1,6 +1,6 @@
    node {
 	   stage('Node locatie aanpassen'){
-		sh 'sudo cp -R var/lib/jenkins/workspace/SNB2_keuze/* var/lib/jenkins/workspace/SNB2_keuze@2/
+		sh 'sudo cp -R var/lib/jenkins/workspace/SNB2_keuze/* var/lib/jenkins/workspace/SNB2_keuze@2/'
 	   }
 	    
       stage('Build'){
