@@ -1,8 +1,7 @@
    node {
-	   stage('Node locatie aanpassen'){
-		sh 'sudo cp -R var/lib/jenkins/workspace/SNB2_Keuze/* var/lib/jenkins/workspace/SNB2_Keuze@2/'
+	  stage('Node locatie aanpassen'){
+		sh 'sudo cp -R /var/lib/jenkins/workspace/SNB2_Keuze/* /var/lib/jenkins/workspace/SNB2_Keuze@2/'
 	   }
-	    
       stage('Build'){
               sh 'composer install' 
               echo 'Build'
