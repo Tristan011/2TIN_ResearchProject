@@ -1,49 +1,33 @@
-pipeline {
-    agent any
-        stages{
-            stage('Fetch code'){
-                steps{
-                git 'https://github.com/Tristan011/jenkins-example.git'
-                }
-            }
-            stage('Build'){
-                steps{
-                    withMaven{ //hiervoor moet plugin 'pipeline-maven' geinstalleer worden
-                       sh 'mvn clean compile'
-                    }
-                }
-            }
-            stage('Test'){
-                steps{
-                    withMaven{ //hiervoor moet plugin 'pipeline-maven' geinstalleer worden
-                        sh 'mvn test'
-                    }
-                }
-            }
-            stage('Artifact'){
-                steps{
-                    archiveArtifacts artifacts: '**', onlyIfSuccessful: true
-                }
-            }
-            stage('Deployment stage'){
-                steps{
-                    //withMaven{ //hiervoor moet plugin 'pipeline-maven' geinstalleer worden
-                        //sh 'mvn deploy'
-                        //sh 'javac javatestrun.java'
-                        //sh 'cd target/classes/com/techprimers/testing/'
-                        //sh 'cd src/main/java/com/techprimers/testing/'
-                        //sh 'javac -sourcepath src/main/java/com/techprimers/testing/ FizzBuzz.java'
-                        //sh 'java -sourcepath src/main/java/com/techprimers/testing/ FizzBuzz'
-                        sh 'cd target/classes/com/techprimers/testing/ java FizzBuzz'
-                    //}
-                }
-            }
-            stage('Post clean-up'){
-                steps{
-                    echo 'Delete folders'
-                }
-            }
-            
-        }
-    
-}
+   node {
+      
+      stage('fetch-code') {
+        
+            git 'https://github.com/Tristan011/2TIN_ResearchProject.git'
+            echo 'Code van git gehaald'
+      }
+      stage('Build'){
+              sh 'composer install' 
+              echo 'Build'
+      }
+      stage('test'){
+              sh './vendor/bin/phpunit tests build/phpunit.xml'
+              echo 'unittest uitgevoerd'
+          }
+      stage('Artifact'){
+              archiveArtifacts artifacts: '**', onlyIfSuccessful: true //alles archiveren van de repo --> locatie: /var/lib/jenkins/jobs/...
+      }
+      stage('Mysql database update'){
+         
+              sh 'mysql -u root -pMysqllaatmebinnen1! employees </var/lib/jenkins/workspace/SNB2_pipeline/employees.sql'
+              echo 'Mysql updaten door .sql file in repo'
+          }
+      
+      stage('Deploy to Apache'){
+         
+              sh 'sudo cp -R /var/lib/jenkins/workspace/SNB2_Keuze@2/* /var/www/html/'
+              echo'Depoymetn of repo to live'
+          
+      }
+      stage('Post-clean'){
+	    deleteDir() // Dit verwijderd de huidige directory waar deze pipeline in zit
+   }
